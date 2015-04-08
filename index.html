@@ -12,11 +12,31 @@ To change this template use Tools | Templates.
     <link rel="stylesheet" href="css/style.css">
 
 </head>
+    
+    
 <body>
-    <div ng-view>
-        
-        
-
+    
+    <div id= "logo">
+        <img src="img/solihulllogo.png">
     </div>
+    <div id = "nav">
+       <ul>
+           <li><a href="#">Home</a></li>
+           <li><a href="#">Add A Student</a></li>
+           <li><a href="#">Search Student</a></li>
+           <li><a href="#">Help</a></li>
+           <li class = "logout"> Your Signed in as:  Logout</li>
+       </ul>
+         
+    </div>
+    
+    <div id = "container">
+        CONTAINER
+       <div ng-view>
+           
+           
+        </div> 
+    </div>
+    
 </body>
 </html>

@@ -1,0 +1,19 @@
+ <div id="logindiv ">
+     <form ng-controller="Login as loginAng">
+        <h1>Login</h1>
+        <p>
+            
+            <label><span>Username:</span>
+                <input type="text" ng-model="loginAng.username">
+            </label>
+            <label><span>Password:</span>
+                <input type="password" ng-model="loginAng.password">
+            </label>
+            <label><span></span><button ng-click="loginAng.login()">
+                Login
+                </button></label>
+            <label><p><span><h2>not a member?<a href="#/signup">Sign Up</a></h2></span></p></label>
+        </p>
+
+    </form>
+</div>
