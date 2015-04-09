@@ -32,8 +32,6 @@
 }
 #container {
     position:relative;
-    border-width:1px;
-    border-style:solid;
     width:90%;
     height:;
     margin-left:5%;
@@ -66,4 +64,11 @@
 ul{
     padding:0px;
     margin:0px;
+}
+.onediv{
+    border-width:1px;
+    border-style:solid;
+    border-radius:5px;
+    padding:5%;
+    
 }

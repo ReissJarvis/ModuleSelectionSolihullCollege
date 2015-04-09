@@ -17,21 +17,21 @@ To change this template use Tools | Templates.
 <body>
     
     <div id= "logo">
-        <img src="img/solihulllogo.png">
+        <img src="img/solihulllogo.png"> Apprenticeship Module Selector
     </div>
-    <div id = "nav">
+    <div id = "nav" ng-controller="mainController as login">
+        {{login.setLogin()}}
        <ul>
-           <li><a href="#">Home</a></li>
-           <li><a href="#">Add A Student</a></li>
-           <li><a href="#">Search Student</a></li>
-           <li><a href="#">Help</a></li>
-           <li class = "logout"> Your Signed in as:  Logout</li>
+           <li><a href="#/mainpage">Home</a></li>
+           <li><a href="#/addstudent">Add A Student</a></li>
+           <li><a href="#/search">Search Student</a></li>
+           <li><a href="#/help">Help</a></li>
+           <li class = "logout">{{login.data.string}}<a href='#/{{login.data.href}}'>{{login.data.loginstate}}</a></li>
        </ul>
          
     </div>
     
     <div id = "container">
-        CONTAINER
        <div ng-view>
            
            

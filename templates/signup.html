@@ -1,0 +1,14 @@
+<form ng-controller="signUpController as signup">
+        <h1>Enter your Details</h1>
+        <label><span>Username: </span>
+            <input type="text" ng-model="signup.signupdetails.username">
+        </label>
+        <label><span>Password: </span>
+            <input type="text" ng-model="signup.signupdetails.password">
+        </label>
+        <label><span></span>
+            <button ng-click="signup.signup()">
+                Sign Up
+            </button>
+        </label>
+    </form>
