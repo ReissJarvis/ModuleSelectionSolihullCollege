@@ -9,34 +9,44 @@ To change this template use Tools | Templates.
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-route.js"></script>
     <script type="text/javascript" src="js/application.js"></script>
+    <script src="js/addStudent.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/signup.js"></script>
     <link rel="stylesheet" href="css/style.css">
 
 </head>
-    
-    
+
+
 <body>
-    
-    <div id= "logo">
-        <img src="img/solihulllogo.png"> Apprenticeship Module Selector
+
+    <div id="logo">
+        <img src="img/solihulllogo.png">Apprenticeship Module Selector
     </div>
-    <div id = "nav" ng-controller="mainController as login">
+    <div id="nav" ng-controller="mainController as login">
         {{login.setLogin()}}
-       <ul>
-           <li><a href="#/mainpage">Home</a></li>
-           <li><a href="#/addstudent">Add A Student</a></li>
-           <li><a href="#/search">Search Student</a></li>
-           <li><a href="#/help">Help</a></li>
-           <li class = "logout">{{login.data.string}}<a href='#/{{login.data.href}}'>{{login.data.loginstate}}</a></li>
-       </ul>
-         
+        <ul>
+            <li><a href="#/mainpage">Home</a>
+            </li>
+            <li><a href="#/addstudent">Add A Student</a>
+            </li>
+            <li><a href="#/search">Search Student</a>
+            </li>
+            <li><a href="#/help">Help</a>
+            </li>
+            <li class="logout">{{login.data.string}}<a href='#/{{login.data.href}}'>{{login.data.loginstate}}</a>
+            </li>
+        </ul>
+
+    </div>
+
+    <div id="container">
+        <div ng-view>
+
+
+        </div>
     </div>
     
-    <div id = "container">
-       <div ng-view>
-           
-           
-        </div> 
-    </div>
-    
+
 </body>
+
 </html>

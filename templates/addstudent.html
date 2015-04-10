@@ -1,4 +1,15 @@
-<div class="onediv">
-    ADD STUDENT
-    
+<div class="onediv" ng-controller="addstudent as addStudent">
+    <form>
+         <label><span>Student Name: </span>
+            <input type="text" ng-model="addStudent.student.name">
+        </label>
+        <label><span>Company: </span>
+            <input type="text" ng-model="addStudent.student.company">
+        </label>
+        <label><span></span>
+            <button ng-click="addStudent.Next()">
+                Next
+            </button>
+        </label>
+    </form>
 </div>

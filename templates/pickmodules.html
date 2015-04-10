@@ -1,12 +1,36 @@
-<!--
-To change this template use Tools | Templates.
--->
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-    <title></title>
-</head>
-<body>
 
-</body>
-</html>
+<div ng-controller="addstudent as addStudent" ng-init="init()">
+    
+<div class = "leftdiv">
+    Student Name :
+    Student Company : 
+    Student modules :
+    <div ng-repeat="item in addStudent.get().modules">
+         {{item}} <span class="remove" ng-click="addStudent.removeModule(item)">[Remove]</span>
+    </div>
+</div>
+<div class="rightdiv" >
+    <form>
+        Credits left : {{addStudent.credits}}
+        <div ng-hide="addStudent.loaded">
+            Loading modules......
+        </div>
+        <div ng-repeat="item in addStudent.modules" ng-show = "addStudent.loaded">
+           <div  ng-show="!addStudent.modules[parseInt(item.value._id, 10)]">
+               
+            </div>
+            id  = {{item.value._id}}
+            name = {{item.value.name}}
+            credits = {{item.value.credits}}
+            <button  ng-click="addStudent.addModule(item.value._id, item.value.credits)">
+                Add
+            </button>
+        </div>
+        <label><span></span>
+            <button ng-click="addStudent.Next()">
+                Next
+            </button>
+        </label>
+    </form>
+</div>
+    </div>
