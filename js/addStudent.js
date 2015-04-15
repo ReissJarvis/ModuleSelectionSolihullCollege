@@ -7,7 +7,7 @@ myApp.controller('addstudent', ['UserService', 'studentStorage', '$http', '$loca
             modules: [],
             level: studentStorage.get().level
         }
-        var page = 0,
+        var page = studentStorage.get().page,
             that = this;
         this.nametemp = ""
         this.companytemp = ""
@@ -44,14 +44,42 @@ myApp.controller('addstudent', ['UserService', 'studentStorage', '$http', '$loca
                 case 1:
                     studentStorage.set(that.nametemp, that.companytemp)
                     studentStorage.setLevel(that.leveltemp)
+                    studentStorage.changepage(page);
                     $location.path('/pickmodules')
                     $location.replace
                     break;
                 case 2:
-                    page = 0
-                    $location.path('/summary')
+                    if( 
+                        that.rule.totalcredits == true &&
+                        that.rule.unitflag == true &&
+                        that.rule.minimumcredits == true&&
+                        that.rule.maximumunit == true&&
+                        that.rule.maximumcredits == true
+                        ){
+                        studentStorage.changepage(page);
+                        studentStorage.setModules(student.modules)
+                        $location.path('/summary')
                     $location.replace
                     break;
+                    }
+                    break;
+                case 3:
+                    console.log("in case 3")
+                    var callbackfunction = function(code){
+                        if (code == 201){
+                            alert("SUCCESS!, Student added")
+                            page = 0
+                            studentStorage.changepage(page);
+                            $location.path('/addstudent')
+                            $location.replace
+                            
+                        }else{
+                            console.log(code)
+                            page--
+                        } 
+                    }
+                    console.log(callbackfunction)
+                    studentStorage.addtodatabase(callbackfunction)
                 default:
                     $location.path('/addstudent')
                     $location.replace;
@@ -409,13 +437,14 @@ myApp.controller('addstudent', ['UserService', 'studentStorage', '$http', '$loca
         }
     }
 ]);
-myApp.factory('studentStorage', [
-    function() {
+myApp.factory('studentStorage', ["UserService","$http",
+    function(UserService,$http) {
         var student = {
             name: "",
             company: "",
             modules: [],
-            level: 0
+            level: 0,
+            page:0
         }
         return {
             get: function() {
@@ -434,8 +463,39 @@ myApp.factory('studentStorage', [
                 student.level = level;
                 return student
             },
+            addtodatabase:function(callback){
+                console.log('Add to database')
+                var d = new Date();
+                var data = {
+                    "name":student.name,
+                    "company":student.company,
+                    "modules": student.modules,
+                    "levelofstudy": student.level,
+                    "addedBy": UserService.get().username,
+                    "dateadded": d,
+                    "datemodified":d
+                }
+                $http({
+                url: "http://solihullapprenticeships.iriscouch.com/students/"+ student.name,
+                method: 'PUT',
+                withCredentials: true,
+                headers: {
+                    'Authorization': auth_hash(UserService.get().username, UserService.get().password)
+                },
+                data:data
+            }).success(function(data, status, headers, config) {
+                callback(status);
+            }).error(function(data, status, headers, config, statusText) {
+                callback(status);
+            })
+                
+            },
+            changepage:function(page){
+              student.page = page;
+                return student
+            },
             reset: function() {
-                console.log('user service reset ');
+                console.log('Student Storage reset ');
                 return student;
             }
         };
