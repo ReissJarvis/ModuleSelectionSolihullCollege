@@ -1,10 +1,17 @@
 <div class="onediv" ng-controller="addstudent as addStudent">
     <form>
          <label><span>Student Name: </span>
-            <input type="text" ng-model="addStudent.student.name">
+            <input type="text" ng-model="addStudent.nametemp">
         </label>
         <label><span>Company: </span>
-            <input type="text" ng-model="addStudent.student.company">
+            <input type="text" ng-model="addStudent.companytemp">
+        </label>
+        <label><span>Level of Qualification</span>
+            <select ng-model="addStudent.leveltemp">
+  <option value="2">Level 2 Diploma in ICT Professional Competence</option>
+  <option value="3">Level 3 Diploma in ICT Professional Competence,</option>
+  <option value="4">Level 4 Diploma in ICT Professional Competence,</option>
+</select>
         </label>
         <label><span></span>
             <button ng-click="addStudent.Next()">
