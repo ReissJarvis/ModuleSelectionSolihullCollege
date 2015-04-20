@@ -116,10 +116,7 @@ myApp.controller('addstudent', ['UserService', 'studentStorage', '$http', '$loca
                 })
 
             }).error(function(data, status, headers, config, statusText) {
-                if(status == 401){
-                     $location.path('/login')
-                    $location.replace;
-                }
+              alert("couldnt get modules, please try again")
             })
         }
         this.addModule = function(id,name,credits) {
@@ -451,7 +448,7 @@ myApp.factory('studentStorage', ["UserService","$http",
             company: "",
             modules: [],
             level: 3,
-            page:0
+            page:1
         }
         return {
             get: function() {
@@ -508,7 +505,7 @@ myApp.factory('studentStorage', ["UserService","$http",
             company: "",
             modules: [],
             level: 3,
-            page:0
+            page:1
                 }
                 return student;
             }
