@@ -1,11 +1,38 @@
-<div class="onediv" ng-controller="addstudent as addStudent">
-    
-    <h1>Student Summary</h1>
-    <form>
-        <label><span></span>
-            <button ng-click="addStudent.Next()">
-                Next
-            </button>
-        </label>
-    </form>
+<div class="onediv" ng-controller="addstudent as addStudent"ng-init="addStudent.setpage(2)">
+    <div id="print">
+        <form>
+            <h1>Student Summary<span>Below shows the Details for the student</span></h1>
+            <label><span>Student name :</span> <input type = "text" value="{{addStudent.getstudent().name}}">{{addStudent.getstudent().name}}</label>
+            <label><span>Student company :</span> {{addStudent.getstudent().company}}</label>
+            <label><span></span>
+                <table>
+                    <tr>
+                        <th>Module Code</th>
+                        <th>Name</th>
+                        <th>Credits</th>
+                    </tr>
+                    <tr ng-repeat="item in addStudent.getstudent().modules track by $id(item)" ng-show="!addStudent.modules[parseInt(item.value._id, 10)].show">
+                        <td>{{item._id}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.credits}}</td>
+                    </tr>
+                </table>
+            </label>
+            <label ng-hide="addStudent.printopen"><span></span>
+                <button class="button" ng-click="addStudent.printDiv('print')">
+                    Make Printable
+                </button>
+                <button class="button" ng-click="addStudent.Edit()">
+                    Edit
+                </button>
+                <button class="button" ng-click="addStudent.Next()">
+                    Next
+                </button>
+            </label>
+        </form>
+        
+        <form ng-show="">
+            
+        </form>
+    </div>
 </div>

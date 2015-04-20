@@ -1,20 +1,34 @@
 myApp.controller('addstudent', ['UserService', 'studentStorage', '$http', '$location', '$scope',
     function(UserService, studentStorage, $http, $location, $scope) {
         // temp local page student storage
+        
+        if(UserService.get().isLoggedIn){
+            console.log("is Logged in")
+            
+        }else{ 
+             $location.path('/login')
+                    $location.replace 
+        }
         var student = {
             name: studentStorage.get().name,
             company: studentStorage.get().company,
-            modules: [],
+            modules: studentStorage.get().modules,
             level: studentStorage.get().level
         }
         var page = studentStorage.get().page,
             that = this;
-        this.nametemp = ""
-        this.companytemp = ""
-        this.leveltemp = 3
+        this.nametemp =studentStorage.get().name
+        this.companytemp = studentStorage.get().name
+        //set page for each time page is open.
+        this.setpage = function(page){
+            studentStorage.changepage(page)
+            console.log("page = " + studentStorage.get().page);
+        }
+        this.leveltemp = studentStorage.get().level
         this.getstudent = function() {
             return student;
         }
+        this.printopen = false
         this.loaded = false;
         this.showfunc = function() {
             that.loaded = true;
@@ -58,6 +72,7 @@ myApp.controller('addstudent', ['UserService', 'studentStorage', '$http', '$loca
                         ){
                         studentStorage.changepage(page);
                         studentStorage.setModules(student.modules)
+                        console.log(studentStorage.get().modules)
                         $location.path('/summary')
                     $location.replace
                     break;
@@ -67,9 +82,8 @@ myApp.controller('addstudent', ['UserService', 'studentStorage', '$http', '$loca
                     console.log("in case 3")
                     var callbackfunction = function(code){
                         if (code == 201){
-                            alert("SUCCESS!, Student added")
-                            page = 0
-                            studentStorage.changepage(page);
+                            studentStorage.reset();
+                            console.log("Student added Sucessfully")
                             $location.path('/addstudent')
                             $location.replace
                             
@@ -114,7 +128,7 @@ myApp.controller('addstudent', ['UserService', 'studentStorage', '$http', '$loca
             })
         }
         //addStudent.addModule(item.value._id, item.value.credits)
-        this.addModule = function(id, credits) {
+        this.addModule = function(id,name,credits) {
             // check module can be added aswell. This should be important when the rule 
             // will need to be used. 
             id = parseInt(id, 10)
@@ -136,6 +150,7 @@ myApp.controller('addstudent', ['UserService', 'studentStorage', '$http', '$loca
             } else {
                 student.modules.push({
                     modulecode: parseInt(id, 10),
+                    name:name,
                     credits: credits
                 });
                 that.buttons[id] = true
@@ -409,8 +424,25 @@ myApp.controller('addstudent', ['UserService', 'studentStorage', '$http', '$loca
         this.get = function() {
             return student
         }
+        this.printDiv = function(divName) {
+            that.printopen = true
+  var printContents = document.getElementById(divName).innerHTML;
+  var popupWin = window.open('', '_blank', 'width=300,height=300');
+  popupWin.document.open()
+  popupWin.document.write('<html><head><link rel="stylesheet" type="text/css" href="css/style.css" /></head><body>' + printContents + '</html>');
+that.printopen = false
+        }
+        this.Edit=function(){
+             $location.path('/addstudent')
+                    $location.replace;
+                 
+         
+        }
         $scope.init = function() {
+            that.setpage(1);
+            // get the modules for the page
             that.getModules();
+            // set the rule text for each level
             if(studentStorage.get().level == 2) {
                         that.rule.totalcredits_text= "Need a minimum if 48 credits"
                         that.rule.unitflag_text= "Need 9 Credits from: 102, 204"
@@ -443,7 +475,7 @@ myApp.factory('studentStorage', ["UserService","$http",
             name: "",
             company: "",
             modules: [],
-            level: 0,
+            level: 3,
             page:0
         }
         return {
@@ -494,8 +526,16 @@ myApp.factory('studentStorage', ["UserService","$http",
               student.page = page;
                 return student
             },
+
             reset: function() {
                 console.log('Student Storage reset ');
+                student = {
+            name: "",
+            company: "",
+            modules: [],
+            level: 3,
+            page:0
+                }
                 return student;
             }
         };

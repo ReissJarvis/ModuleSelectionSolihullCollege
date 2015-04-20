@@ -1,7 +1,7 @@
  <div class="onediv">
      <form ng-controller="Login as loginAng">
         <h1>Login</h1>
-        <p>
+       
             
             <label><span>Username:</span>
                 <input type="text" ng-model="loginAng.username">
@@ -9,11 +9,10 @@
             <label><span>Password:</span>
                 <input type="password" ng-model="loginAng.password">
             </label>
-            <label><span></span><button ng-click="loginAng.login()">
+            <label><span></span><button class = "button" ng-click="loginAng.login()">
                 Login
-                </button></label>
-            <label><p><span><h2>not a member?<a href="#/signup">Sign Up</a></h2></span></p></label>
-        </p>
+                </button> not a member? <a href="#/signup">Sign Up</a></label>
+       
 
     </form>
 </div>

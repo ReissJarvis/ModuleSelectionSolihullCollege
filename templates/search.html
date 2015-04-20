@@ -1,0 +1,39 @@
+<div class="onediv" ng-controller="searchStudent as searchStudent">
+    <form>
+Search by:
+         <label><span><select ng-model="searchStudent.searchBy">
+  <option value="name">Name</option>
+  <option value="company">Company</option>
+</select></span>
+            <input type="text" ng-model="searchStudent.searchterm">
+        </label>
+        <label><span></span>
+            <button ng-click="searchStudent.search()">
+                Next
+            </button>
+        </label>
+    </form>
+    
+    <div ng-show="searchStudent.startsearch">
+         <div ng-hide = "searchStudent.loaded">
+        Loading Results.........
+    </div>
+    <div ng-show="searchStudent.loaded">
+        Found : {{searchStudent.results.length}} results For {{searchStudent.searchterm}}
+        <table>
+            <tr></tr>
+            <th>Student Name</th>
+            <th>Student Company</th>
+            <th></th>
+            <tr ng-repeart="item in searchStudent.results track by $id(item)">
+            <th>{{item.value._id}}</th>
+            <th>{{item.value.company}}</th>
+            <th><button>
+                Select
+                </button></th>
+            </tr>
+        </table>
+    </div>
+    </div>
+   
+</div>

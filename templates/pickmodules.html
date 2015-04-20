@@ -1,52 +1,70 @@
 <div ng-controller="addstudent as addStudent" ng-init="init()">
-
     <div class="leftdiv">
-        <label><span>Student Name :</span>{{addStudent.getstudent().name}}</label>
-        <label><span>Student Company :</span>{{addStudent.getstudent().company}}</label>
-
-        Student modules :
-        <div ng-repeat="item in addStudent.get().modules track by $id(item)">
-            {{item.modulecode}} <span class="remove" ng-click="addStudent.removeModule(item.modulecode,item.credits)">[Remove]</span>
-        </div>
+        <ul class = "studentdetails">
+            <li><label><span>Student Name: </span>{{addStudent.getstudent().name}}</label></li>
+            <li><label><span>Student Company: </span>{{addStudent.getstudent().company}}</label></li>
+            <li> Modules :
+            <ul ng-repeat="item in addStudent.get().modules track by $id(item)">
+                <li>{{item.modulecode}} <span class="remove" ng-click="addStudent.removeModule(item.modulecode,item.credits)">[Remove]</span></li>
+            </ul>
+                </li>
+        </ul>
     </div>
     <div class="rightdiv">
-        <form>
-            Credits Used : {{addStudent.credits}}
-            <div>
-                <ul>
+
+        <div>
+            <form>
+                <h1>Criteria for qualification<span>The rules of Combination</span></h1>
+                <ul class="rules">
+                    <li>Credits Used :{{addStudent.credits}}</li>
                     <li ng-hide="addStudent.rule.unitflag">{{addStudent.rule.unitflag_text}}</li>
                     <li ng-hide="addStudent.rule.totalcredits">{{addStudent.rule.totalcredits_text}}</li>
                     <li ng-hide="addStudent.rule.minimumcredits">{{addStudent.rule.minimumcredits_text}}</li>
                     <li ng-hide="addStudent.rule.maximumunit">{{addStudent.rule.maximumunit_text}}</li>
                     <li ng-hide="addStudent.rule.maximumcredits">{{addStudent.rule.maximumcredits_text}}</li>
                 </ul>
-            </div>
+
+            </form>
+        </div>
+        <div id="space">
+
+        </div>
+        <form >
+            <h1>Please Select the modules<span>These are the modules available for the student</span></h1>
+            <div class="modulechoice">
+                <label><span>Filter by module Code: </span>
+            <input type="text" ng-model="filter.value._id">
+        </label>
+
             <div ng-hide="addStudent.loaded">
                 Loading modules......
             </div>
-                     <table ng-show="addStudent.loaded">
+            <table ng-show="addStudent.loaded">
                 <tr>
                     <th>Module Code</th>
                     <th>Name</th>
                     <th>Credits</th>
                     <th></th>
                 </tr>
-                    <tr ng-repeat="item in addStudent.modules track by $id(item)" ng-show="!addStudent.modules[parseInt(item.value._id, 10)].show">
-                        <td>{{item.value._id}}</td>
-                        <td>{{item.value.name}}</td>
-                        <td>{{item.value.credits}}</td>
-                        <td>
-                            <button ng-click="addStudent.addModule(item.value._id, item.value.credits)" ng-hide="addStudent.buttons[parseInt(item.value._id, 10)]">
-                                Add
-                            </button>
-                        </td>
-                    </tr>
+                <tr ng-repeat="item in addStudent.modules | filter:filter" ng-show="!addStudent.modules[parseInt(item.value._id, 10)].show">
+                    <td>{{item.value._id}}</td>
+                    <td>{{item.value.name}}</td>
+                    <td>{{item.value.credits}}</td>
+                    <td>
+                        <button class="button" ng-click="addStudent.addModule(item.value._id,item.value.name, item.value.credits)" ng-hide="addStudent.buttons[parseInt(item.value._id, 10)]">
+                            Add
+                        </button>
+                    </td>
+                </tr>
             </table>
+            </div>
             <label><span></span>
-                <button ng-click="addStudent.Next()">
+                <button class="button" ng-click="addStudent.Next()">
                     Next
                 </button>
             </label>
+   
         </form>
+
     </div>
 </div>
