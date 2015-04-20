@@ -40,7 +40,7 @@ this.get = function(){
                     method: 'GET',
                     withCredentials: true,
                     headers: {
-                        'Authorization': auth_hash(UserService.get().name, UserService.get().password)
+                        'Authorization': auth_hash(UserService.get().username, UserService.get().password)
                     }
                 }).success(function(data, status, headers, config) {
                     console.log(status)
@@ -49,7 +49,7 @@ this.get = function(){
                         console.log(data.rows)
                         that.results = data.rows
                         that.loaded = true
-                        console.log(auth_hash(UserService.get().name, UserService.get().password))
+                        console.log(auth_hash(UserService.get().username, UserService.get().password))
                     }
                 }).error(function(data, status, headers, config, statusText) {
                     console.log(config)
