@@ -18,7 +18,7 @@ myApp.controller('addstudent', ['UserService', 'studentStorage', '$http', '$loca
         var page = studentStorage.get().page,
             that = this;
         this.nametemp =studentStorage.get().name
-        this.companytemp = studentStorage.get().name
+        this.companytemp = studentStorage.get().company
         //set page for each time page is open.
         this.setpage = function(page){
             studentStorage.changepage(page)
@@ -466,6 +466,7 @@ that.printopen = false
                         $location.path('/addstudent')
                     $location.replace;
                     }
+            that.checkmodules()
         }
     }
 ]);
@@ -499,7 +500,6 @@ myApp.factory('studentStorage', ["UserService","$http",
                 console.log('Add to database')
                 var d = new Date();
                 var data = {
-                    "name":student.name,
                     "company":student.company,
                     "modules": student.modules,
                     "levelofstudy": student.level,

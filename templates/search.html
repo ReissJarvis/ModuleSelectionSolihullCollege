@@ -1,39 +1,62 @@
 <div class="onediv" ng-controller="searchStudent as searchStudent">
     <form>
-Search by:
-         <label><span><select ng-model="searchStudent.searchBy">
+        <h1>Search Student<span>Search for a student by name or by company</span></h1>
+        <label><span>Search By</span><select ng-model="searchStudent.searchBy">
   <option value="name">Name</option>
   <option value="company">Company</option>
-</select></span>
+</select></label>
+        <label><span>Search Term :</span>
             <input type="text" ng-model="searchStudent.searchterm">
         </label>
         <label><span></span>
-            <button ng-click="searchStudent.search()">
-                Next
+            <button class="button" ng-click="searchStudent.search()">
+                Search
             </button>
         </label>
+
+        <label ng-show="searchStudent.startsearch" ><span ng-hide="searchStudent.loaded">Loading  Results..... </span>
+          Search Results
+        </label>
+        <label ng-show="searchStudent.loaded" ><span>Found : </span>{{searchStudent.results.length}} results For {{searchStudent.searchterm}}</label>
+        <label ng-show="searchStudent.loaded" ><span>Results:</span>
+                
+                <table>
+                    <tr></tr>
+                    <th>Student Name</th>
+                    <th>Student Company</th>
+                    <th></th>
+                    <tr ng-repeat="item in searchStudent.results">
+                        <th>{{item.value._id}}</th>
+                        <th>{{item.value.company}}</th>
+                        <th>
+                            <button class = "button" ng-click="searchStudent.Show(item)">
+                                View
+                            </button>
+                            <button class = "button" ng-click="searchStudent.Edit(item)">
+                                Edit
+                            </button>
+
+                        </th>
+                    </tr>
+                </table>
+        </label>
+
     </form>
-    
-    <div ng-show="searchStudent.startsearch">
-         <div ng-hide = "searchStudent.loaded">
-        Loading Results.........
-    </div>
-    <div ng-show="searchStudent.loaded">
-        Found : {{searchStudent.results.length}} results For {{searchStudent.searchterm}}
-        <table>
-            <tr></tr>
-            <th>Student Name</th>
-            <th>Student Company</th>
-            <th></th>
-            <tr ng-repeart="item in searchStudent.results track by $id(item)">
-            <th>{{item.value._id}}</th>
-            <th>{{item.value.company}}</th>
-            <th><button>
-                Select
-                </button></th>
-            </tr>
-        </table>
-    </div>
-    </div>
-   
+    <form>
+ 
+            <div ng-show="searchStudent.viewstudent">
+                <ul class="studentdetails">
+                    <li>Student Name: {{searchStudent.get().name}}</li>
+                    <li>Student Company: {{searchStudent.get().company}}</li>
+                    <li>Modules :
+                        <ul ng-repeat="item in searchStudent.get().modules track by $id(item)">
+                            <li>{{item.modulecode}} - {{item.name}}</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+    </form>
+
+
+
 </div>
