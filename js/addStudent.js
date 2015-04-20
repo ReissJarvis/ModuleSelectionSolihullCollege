@@ -53,12 +53,12 @@ myApp.controller('addstudent', ['UserService', 'studentStorage', '$http', '$loca
         }
         // change the pages as the users goes through the modules
         this.Next = function() {
-            page++
+            console.log(page)
             switch(page) {
                 case 1:
                     studentStorage.set(that.nametemp, that.companytemp)
                     studentStorage.setLevel(that.leveltemp)
-                    studentStorage.changepage(page);
+                    studentStorage.changepage(2);
                     $location.path('/pickmodules')
                     $location.replace
                     break;
@@ -70,7 +70,7 @@ myApp.controller('addstudent', ['UserService', 'studentStorage', '$http', '$loca
                         that.rule.maximumunit == true&&
                         that.rule.maximumcredits == true
                         ){
-                        studentStorage.changepage(page);
+                        studentStorage.changepage(3);
                         studentStorage.setModules(student.modules)
                         console.log(studentStorage.get().modules)
                         $location.path('/summary')
@@ -82,6 +82,7 @@ myApp.controller('addstudent', ['UserService', 'studentStorage', '$http', '$loca
                     console.log("in case 3")
                     var callbackfunction = function(code){
                         if (code == 201){
+                            studentStorage.changepage(1);
                             studentStorage.reset();
                             console.log("Student added Sucessfully")
                             $location.path('/addstudent')
@@ -89,7 +90,6 @@ myApp.controller('addstudent', ['UserService', 'studentStorage', '$http', '$loca
                             
                         }else{
                             console.log(code)
-                            page--
                         } 
                     }
                     console.log(callbackfunction)
@@ -111,31 +111,18 @@ myApp.controller('addstudent', ['UserService', 'studentStorage', '$http', '$loca
                 that.showfunc();
                 that.modules = data.rows;
                 savemodules = data.rows;
-                data.rows.forEach(function(item) {
-                    that.buttons[parseInt(item.value._id, 10)] = false
-                })
                 that.modules.forEach(function(item) {
                     item.value.show = true;
                 })
-                console.log(that.modules)
-                console.log(that.modules)
+
             }).error(function(data, status, headers, config, statusText) {
-                console.log(data)
-                console.log('status: ' + status)
-                console.log('headers: ' + headers)
-                console.log(config)
-                console.log(statusText)
+                if(status == 401){
+                     $location.path('/login')
+                    $location.replace;
+                }
             })
         }
-        //addStudent.addModule(item.value._id, item.value.credits)
         this.addModule = function(id,name,credits) {
-            // check module can be added aswell. This should be important when the rule 
-            // will need to be used. 
-            id = parseInt(id, 10)
-            //console.log(that.buttons)
-            that.buttons[id] = true;
-            //console.log(' BUTTON PICKED : ' + id)
-            //console.log(student.modules.indexOf(id))
             var count = 0;
             var array = -1;
             student.modules.forEach(function(item) {
@@ -153,7 +140,7 @@ myApp.controller('addstudent', ['UserService', 'studentStorage', '$http', '$loca
                     name:name,
                     credits: credits
                 });
-                that.buttons[id] = true
+
                 that.credits = that.credits + credits;
                 that.checkmodules();
             }
@@ -163,17 +150,14 @@ myApp.controller('addstudent', ['UserService', 'studentStorage', '$http', '$loca
             var array = -1;
             student.modules.forEach(function(item) {
                 if(item.modulecode == modulecode) {
-                    console.log("module found")
                     array = count;
                 }
                 count++
             })
             if(array >= 0) {
-                that.buttons[modulecode] = false;
                 student.modules.splice(array, 1);
                 //put credits back that were taken away.
                 that.credits = that.credits - credits;
-                that.buttons[modulecode] = false
                 that.checkmodules();
             }
             that.checkmodules();
@@ -189,19 +173,13 @@ myApp.controller('addstudent', ['UserService', 'studentStorage', '$http', '$loca
             // level 4 module rules variables
             var optionalmodulefound = 0;
             var modulefound = false
-            console.log("in check modules");
             that.modules = savemodules;
-            //              savemodules.forEach(function(item,index) {
-            //                 if(item.value.credits > that.credits) {
-            //                     item.value.show = false;
-            //                     that.modules.splice(index, 1);  
-            //                 }else{
-            //                     that.modules.push(item);
-            //                 }
-            //              })
-            // check through the student modules against the rules
-            // level 1 rules
             //level 2 rules
+            //
+            //
+            //
+            //
+            //
             if(student.level == 2) {
                 student.modules.forEach(function(item, index) {
                     // check it contains  1 unit from the modules
@@ -229,7 +207,6 @@ myApp.controller('addstudent', ['UserService', 'studentStorage', '$http', '$loca
                 student.modules.forEach(function(item, index) {
                     // check it contains 304
                     if(item.modulecode == 102 || item.modulecode == 204) {
-                        console.log("in 304")
                         modulecount = modulecount + item.credits
                     }
                 })
@@ -247,18 +224,15 @@ myApp.controller('addstudent', ['UserService', 'studentStorage', '$http', '$loca
                 }
                 // minimum of 27 credits from modules check
                 if(minimumcreditcount >= 27) {
-                    console.log("minimum credit : " + minimumcreditcount)
                     that.rule.minimumcredits = true
                 } else {
                     that.rule.minimumcredits = false
                 }
                 //not greater then 1 unit
                 if(maximumunitcount > 1) {
-                    console.log("over 1")
-                    console.log()
+
                     that.rule.maximumunit = false
                 } else {
-                    console.log("under 1")
                     that.rule.maximumunit = true
                 }
                 // has a minimum of 12 credits 
@@ -439,7 +413,7 @@ that.printopen = false
          
         }
         $scope.init = function() {
-            that.setpage(1);
+            that.setpage(2);
             // get the modules for the page
             that.getModules();
             // set the rule text for each level

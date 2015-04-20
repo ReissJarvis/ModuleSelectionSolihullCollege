@@ -1,13 +1,13 @@
 myApp.controller('searchStudent', ['UserService','studentStorage', '$http', '$location',
     function(UserService, studentStorage, $http, $location) {
         var that = this
-//           if(UserService.get().isLoggedIn){
-//             console.log("is Logged in")
+          if(UserService.get().isLoggedIn){
+            console.log("is Logged in")
             
-//         }else{ 
-//              $location.path('/login')
-//                     $location.replace 
-//         }
+        }else{ 
+             $location.path('/login')
+                    $location.replace 
+        }
 var student = {
             name: "",
             company: "",
@@ -29,13 +29,12 @@ this.get = function(){
                 that.startsearch = true;
                 that.loaded = false;
                 var url = ""
-                
+                 
                 if (that.searchBy == "name"){
                     url= 'http://solihullapprenticeships.iriscouch.com/students/_design/students/_view/byName?startkey="' + that.searchterm + '"&endkey="' + that.searchterm+'"'
                 }else{
-                    url= 'http://solihullapprenticeships.iriscouch.com/students/_design/students/_view/byCompany?startkey="' + that.searchterm + '"&endkey="' + that.searchterm+'"'  
+                    url= 'http://solihullapprenticeships.iriscouch.com/students/_design/students/_view/byCompany?startkey="' + that.searchterm + '"&endkey="' + that.searchterm+'"'
                 }
-                //"http://solihullapprenticeships.iriscouch.com/students/_design/students/_view/all?startkey=" + that.searchterm + "&endkey=" + that.searchterm
                 $http({
                     url: url,
                     method: 'GET',
@@ -53,9 +52,11 @@ this.get = function(){
                         console.log(auth_hash(UserService.get().name, UserService.get().password))
                     }
                 }).error(function(data, status, headers, config, statusText) {
-                    console.log(data)
+                    console.log(config)
                     console.log(status)
                 })
+            }else{
+                alert("Please enter a search term")
             }
         }
         this.Show= function(item){

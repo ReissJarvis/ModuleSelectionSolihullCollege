@@ -92,71 +92,7 @@ myApp.controller('logout', ['UserService', '$http', '$location',
         this.logout();
     }
 ]);
-myApp.controller('addstudent', ['UserService', '$http', '$location','$scope',
-    function(UserService, $http, $location, $scope) {
-        this.student = {
-            name: "",
-            company: "",
-            modules: []
-        }
-        var page = 0,
-            that= this;
-        this.modules = [];
-        this.credits = 72;
-       
-        // change the pages as the users goes through the modules
-        this.Next = function() {
-            page++
-            switch(page) {
-                case 1:
-                    $location.path('/pickmodules')
-                    $location.replace
-                    break;
-                case 2:
-                    page = 0
-                    $location.path('/summary')
-                    $location.replace
-                    break;
-                default:
-                    $location.path('/addstudent')
-                    $location.replace;
-            }
-        }
-        this.getModules=function(){
-            $http({
-                url: "http://solihullapprenticeships.iriscouch.com/modules/_design/modules/_view/all",
-                method: 'GET',
-                withCredentials: true,
-                headers: {
-                    'Authorization': auth_hash(UserService.get().username, UserService.get().password)
-                }
-            }).success(function(data, status, headers, config) {
-                that.modules = data.rows
-                console.log(that.modules)
-            }).error(function(data, status, headers, config, statusText) {
-                console.log(data)
-                console.log('status: ' + status)
-                console.log('headers: ' + headers)
-                console.log(config)
-                console.log(statusText)
-            })
-            
-        }
-        this.addModule = function(modulecode){
-            that
-            
-        }
-        this.checkmodules=function(){
-            // gonna be the most difficult part
-            
-        }
-        
-        $scope.init=function(){
-            
-            that.getModules();
-        }
-    }
-]);
+
 myApp.factory('UserService', [
     function() {
         var status = {
