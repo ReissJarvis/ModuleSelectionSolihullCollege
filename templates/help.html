@@ -1,0 +1,287 @@
+<div class="one div">
+    <h1>Help</h1>
+    <p>On this page you will be able to find instructions on how to use the program. If you are stuck at a certain part of the program this guide is to help you.
+        <ul>Sections included to help:
+            <li>Logging in</li>
+            <li>Signing up</li>
+            <li>Adding a Student</li>
+            <li>Searching a Student</li>
+        </ul>
+
+    </p>
+    <h1>Logging in</h1>
+    <p>To login simply use the two text fields provided by the</p>
+    <form>
+        <h1>Login</h1>
+        <label><span>Username:</span>
+            <input type="text" placeholder="This Is where you put your Username">
+        </label>
+        <label><span>Password:</span>
+            <input type="password" placeholder="This is where you put your password.">
+        </label>
+        <label><span></span>
+            <button class="button">
+                Login (press this button when you have entered your details)
+            </button>not a member? <a>Sign Up (click here to go to the sign up page)</a>
+        </label>
+    </form>
+
+    <h1> Signing up</h1>
+    <p>TO sign up simply put your details into the text boxes then press the button</p>
+    <form>
+        <h1>Enter your Details</h1>
+        <label><span>Username: </span>
+            <input type="text" placeholder="Enter your desired Username here">
+        </label>
+        <label><span>Password: </span>
+            <input type="text" placeholder="Enter your desired password here">
+        </label>
+        <label><span></span>
+            <button class="button">
+                Sign Up (Once you have decided your username and password click here)
+            </button>
+        </label>
+    </form>
+    <h1> Adding a student</h1>
+    <p>This section will go through the 3 phases: adding student details, module selection and then summary.</p>
+    <h2> adding student details</h2>
+    <p>To add the student details, the form can be found below with some sample data:</p>
+    <form>
+        <h1>Student details<span>please enter student details</span></h1>
+        <label><span>Student Name:</span>
+            <input type="text" value="input the students name here, example : John Jones">
+        </label>
+        <label><span>Company: </span>
+            <input type="text" value=" Input the student company here, example : Tesco">
+        </label>
+        <label><span>Level of Qualification</span>
+            <select>
+                <option>Use this Drop down menu to pick a different level of study</option>
+                <option value="2">Level 2 Diploma in ICT Professional Competence</option>
+                <option value="3">Level 3 Diploma in ICT Professional Competence</option>
+                <option value="4">Level 4 Diploma in ICT Professional Competence</option>
+            </select>
+        </label>
+        <label><span></span>
+            <button class="button" ng-click="addStudent.Next()">
+                Next (Press this button when you have entered the students details and picked the level of study)
+            </button>
+        </label>
+    </form>
+
+    <h2>Picking modules for the student</h2>
+
+    <p>On this page, you are able to add the Students module choices</p>
+    <div class="leftdiv">
+        <ul class="studentdetails">
+            <li>
+                <label><span>Student Name: </span>STUDENT NAME</label>
+            </li>
+            <li>
+                <label><span>Student Company: </span>STUDENT COMPANY</label>
+            </li>
+            <li>Modules :
+                <ul>
+                    <li>MODULE CODE <span class="remove">[Remove] <- press this button to remove module from the list</span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="rightdiv">
+
+        <div>
+            <form>
+                <h1>Criteria for qualification<span>The rules of Combination</span></h1>
+                <label><span></span> The Rules of Combination will be found here</label>
+                <label><span></span> To be able to go to the next section, no rules must be present</label>
+                <label><span></span> Just the credit total</label>
+            </form>
+        </div>
+        <div id="space">
+
+        </div>
+        <form>
+            <h1>Please Select the modules<span>These are the modules available for the student</span></h1>
+            <div class="modulechoice">
+                <label><span>Filter by module Code: </span>
+                    <input type="text" value=" You can filter the module by ID by placing it in this text box, example : 204">
+                </label>
+                <table>
+                    <tr>
+                        <th>Module Code</th>
+                        <th>Name</th>
+                        <th>Credits</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>MODULE ID</td>
+                        <td>MODULE NAME</td>
+                        <td>MODULE CREDITS</td>
+                        <td>
+                            <button class="button">
+                                Add (Click this button to add the module)
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <label><span></span>
+                <button class="button">
+                    Next (Once all rules of combination Have been passed, you are able to go to the next section. )
+                </button>
+            </label>
+
+        </form>
+
+    </div>
+    <br>
+    <div style="clear: both;"></div>
+    <h2> navigating the summary page</h2>
+    <p>the summary page will display the details of the student and also what modules have been chosen.</p>
+    <div>
+        <form>
+            <h1>Student Summary<span>Below shows the Details for the student</span></h1>
+            <label><span>Student name :</span> 
+                <input type="text" value=" STUDENT NAME">
+            </label>
+            <label><span>Student company :</span> 
+                <input type="text" value="STUDENT COMPANY">
+            </label>
+            <label><span></span>
+                <table>
+                    <tr>
+                        <th>Module Code</th>
+                        <th>Name</th>
+                        <th>Credits</th>
+                    </tr>
+                    <tr>
+                        <td>MODULE CODE</td>
+                        <td>MODULE NAME</td>
+                        <td>MODULE CREDITS</td>
+                    </tr>
+                    <tr>
+                        <td>MODULE CODE</td>
+                        <td>MODULE NAME</td>
+                        <td>MODULE CREDITS</td>
+                    </tr>
+                    <tr>
+                        <td>MODULE CODE</td>
+                        <td>MODULE NAME</td>
+                        <td>MODULE CREDITS</td>
+                    </tr>
+                    <tr>
+                        <td>MODULE CODE</td>
+                        <td>MODULE NAME</td>
+                        <td>MODULE CREDITS</td>
+                    </tr>
+                    <tr>
+                        <td>MODULE CODE</td>
+                        <td>MODULE NAME</td>
+                        <td>MODULE CREDITS</td>
+                    </tr>
+                </table>
+            </label>
+            <label><span></span>
+                <button class="button">
+                    Make Printable (open a new window to print off the student details)
+                </button>
+                <button class="button">
+                    Edit (Edit the student before saving)
+                </button>
+                <button class="button">
+                    Save Student (Save the student when your happy with the details)
+                </button>
+            </label>
+        </form>
+    </div>
+    <h1> Searching for a student</h1>
+    <p>In this section you will be shown how to search for a student and then press search</p>
+
+    <h2>Searching</h2>
+    <p>To search simply input the search term in the text box</p>
+    <form>
+        <h1>Search Student<span>Search for a student by name or by company</span></h1>
+        <label><span>Search By</span>
+            <select>
+                <option value="name">Select by name or by company from this dropdown menu</option>
+                <option value="name">Name</option>
+                <option value="company">Company</option>
+            </select>
+        </label>
+        <label><span>Search Term :</span>
+            <input type="text" value="search for the student here, select by name or company from above">
+        </label>
+        <label><span></span>
+            <button class="button">
+                Search (once you have input what you want to search for, click here)
+            </button>
+        </label>
+
+
+
+    </form>
+    <h2>Using search results</h2>
+    <p>When you have results, simply press view or edit the student.</p>
+    <form>
+        <label><span></span>
+            Search Results
+        </label>
+        <label><span>Found : </span> 2 results For WHAT YOU SEARCHED GOES HERE</label>
+        <label><span>Results:</span>
+
+            <table>
+                <tr></tr>
+                <th>Student Name</th>
+                <th>Student Company</th>
+                <th></th>
+                <tr>
+                    <td>STUDENT NAME 1</td>
+                    <td>STUDENT COMPANY 1</td>
+                    <td>
+                        <button class="button" ng-click="searchStudent.Show(item)">
+                            View (click to view the students details and modules)
+                        </button>
+                        <button class="button" ng-click="searchStudent.Edit(item)">
+                            Edit (click to edit the student to make changes)
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>STUDENT NAME 2</td>
+                    <td>STUDENT COMPANY 2</td>
+                    <td>
+                        <button class="button">
+                            View (click to view the students details and modules)
+                        </button>
+                        <button class="button">
+                            Edit (click to edit the student to make changes)
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </label>
+
+    </form>
+<h2>Viewing student</h2>
+<p>When viewing student, you will get an input as shown below: </p>
+
+ <form>
+            <div>
+                <ul class="studentdetails">
+                    <li>Student Name: STUDENT NAME</li>
+                    <li>Student Company: STUDENT COMPANY</li>
+                    <li>Modules :
+                        <ul>
+                            <li>MODULE CODE - MODULE NAME</li>
+                            <li>MODULE CODE - MODULE NAME</li>
+                            <li>MODULE CODE - MODULE NAME</li>
+                            <li>MODULE CODE - MODULE NAME</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+    </form>
+<h2>Editing a student</h2>
+<p> to edit a student, you will follow the same path as adding a student. refer to the add student section to know what each individual section does.</p>
+</div>

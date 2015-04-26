@@ -12,7 +12,7 @@
                         <th>Credits</th>
                     </tr>
                     <tr ng-repeat="item in addStudent.getstudent().modules track by $id(item)" ng-show="!addStudent.modules[parseInt(item.value._id, 10)].show">
-                        <td>{{item._id}}</td>
+                        <td>{{item.modulecode}}</td>
                         <td>{{item.name}}</td>
                         <td>{{item.credits}}</td>
                     </tr>
@@ -26,7 +26,7 @@
                     Edit
                 </button>
                 <button class="button" ng-click="addStudent.Next()">
-                    Next
+                    Save Student
                 </button>
             </label>
         </form>

@@ -24,6 +24,8 @@ myApp.config(['$routeProvider',
             templateUrl: 'templates/summary.html'
         }).when('/search', {
             templateUrl: 'templates/search.html'
+        }).when('/help', {
+            templateUrl: 'templates/help.html'
         }).otherwise({
             redirectTo: '/login'
         })

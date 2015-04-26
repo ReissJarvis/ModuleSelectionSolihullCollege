@@ -66,8 +66,8 @@ myApp.controller('addstudent', ['UserService', 'studentStorage', '$http', '$loca
                     if( 
                         that.rule.totalcredits == true &&
                         that.rule.unitflag == true &&
-                        that.rule.minimumcredits == true&&
-                        that.rule.maximumunit == true&&
+                        that.rule.minimumcredits == true &&
+                        that.rule.maximumunit == true &&
                         that.rule.maximumcredits == true
                         ){
                         studentStorage.changepage(3);
@@ -190,6 +190,9 @@ myApp.controller('addstudent', ['UserService', 'studentStorage', '$http', '$loca
                     // minimum of 48 credits
                     if((item.modulecode == 102) || (item.modulecode == 103) || (item.modulecode >= 106 && item.modulecode <= 111) || (item.modulecode >= 113 && item.modulecode <= 114) || (item.modulecode >= 171 && item.modulecode <= 180) || (item.modulecode >= 186 && item.modulecode <= 187) || (item.modulecode == 201) || (item.modulecode >= 203 && item.modulecode <= 206) || (item.modulecode >= 208 && item.modulecode <= 217) || (item.modulecode >= 219 && item.modulecode <= 225) || (item.modulecode >= 229 && item.modulecode <= 230) || (item.modulecode == 232) || (item.modulecode >= 237 && item.modulecode <= 243) || (item.modulecode >= 252 && item.modulecode <= 258) || (item.modulecode >= 271 && item.modulecode <= 281) || (item.modulecode == 301) || (item.modulecode == 303) || (item.modulecode >= 305 && item.modulecode <= 317) || (item.modulecode >= 319 && item.modulecode <= 327) || (item.modulecode >= 329 && item.modulecode <= 351) || (item.modulecode >= 371 && item.modulecode <= 385) || (item.modulecode >= 388 && item.modulecode <= 400) || (item.modulecode >= 435 && item.modulecode <= 437)) {
                         tempcreditcheck = tempcreditcheck + item.credits;
+                    }else{
+                        alert("Unable to pick module: "+ item.modulecode + " , Please select another")
+                        that.removeModule(item.modulecode,item.credits)
                     }
                     // minmum of 27 credits from these 
                     if((item.modulecode == 201) || (item.modulecode == 203) || (item.modulecode == 204) || (item.modulecode >= 205 && item.modulecode <= 206) || (item.modulecode >= 208 && item.modulecode <= 217) || (item.modulecode >= 219 && item.modulecode <= 225) || (item.modulecode >= 229 && item.modulecode <= 230) || (item.modulecode == 232) || (item.modulecode >= 237 && item.modulecode <= 243) || (item.modulecode >= 252 && item.modulecode <= 258)) {
@@ -215,6 +218,7 @@ myApp.controller('addstudent', ['UserService', 'studentStorage', '$http', '$loca
                 //check all the counts to check its past the number or below the number
                 //total credit checks
                 if(tempcreditcheck >= 48) {
+                    console.log("over 48")
                     that.rule.totalcredits = true
                 } else {
                     that.rule.totalcredits = false;
@@ -239,6 +243,7 @@ myApp.controller('addstudent', ['UserService', 'studentStorage', '$http', '$loca
                 } else {
                     that.rule.maximumcredits = true
                 }
+                that.credits = tempcreditcheck
             }
             // // level 3 Rules
             // 
@@ -306,6 +311,7 @@ myApp.controller('addstudent', ['UserService', 'studentStorage', '$http', '$loca
                 } else {
                     that.rule.maximumcredits = true
                 }
+                that.credits = tempcreditcheck
             }
             // level 4 rules
             // 
@@ -390,6 +396,7 @@ myApp.controller('addstudent', ['UserService', 'studentStorage', '$http', '$loca
                 } else {
                     that.rule.maximumcredits = true
                 }
+                that.credits = tempcreditcheck
             }
         }
         this.get = function() {
@@ -404,8 +411,9 @@ myApp.controller('addstudent', ['UserService', 'studentStorage', '$http', '$loca
 that.printopen = false
         }
         this.Edit=function(){
+            studentStorage.changepage(1);
              $location.path('/addstudent')
-                    $location.replace;
+             $location.replace;
                  
          
         }
@@ -415,7 +423,7 @@ that.printopen = false
             that.getModules();
             // set the rule text for each level
             if(studentStorage.get().level == 2) {
-                        that.rule.totalcredits_text= "Need a minimum if 48 credits"
+                        that.rule.totalcredits_text= "Need a minimum of 48 credits from "
                         that.rule.unitflag_text= "Need 9 Credits from: 102, 204"
                         that.rule.minimumcredits_text= "need a minimum of 27 credits from (201, 203, 204, 205-206, 208-217,219-225, 229-230, 232, 237-243, 252-258, 271-282)"
                         that.rule.maximumunit_text= "need a maximum of 1 unit from (201, 203, 301, 303)"

@@ -26,9 +26,9 @@
                     <th>Student Company</th>
                     <th></th>
                     <tr ng-repeat="item in searchStudent.results">
-                        <th>{{item.value._id}}</th>
-                        <th>{{item.value.company}}</th>
-                        <th>
+                        <td>{{item.id}}</td>
+                        <td>{{item.value.company}}</td>
+                        <td>
                             <button class = "button" ng-click="searchStudent.Show(item)">
                                 View
                             </button>
@@ -36,7 +36,7 @@
                                 Edit
                             </button>
 
-                        </th>
+                        </td>
                     </tr>
                 </table>
         </label>

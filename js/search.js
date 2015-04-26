@@ -60,14 +60,14 @@ this.get = function(){
             }
         }
         this.Show= function(item){
-            student.name = item.value.name
+            student.name = item.value._id
             student.company = item.value.company
             student.modules = item.value.modules
             that.viewstudent = true;
             
         }
             this.Edit = function(item){
-                studentStorage.set(item.value.name, item.value.company)
+                studentStorage.set(item.value._id, item.value.company)
                 studentStorage.setModules(item.value.modules)
                 studentStorage.setLevel(item.value.levelofstudy)
                 $location.path('/addstudent')
