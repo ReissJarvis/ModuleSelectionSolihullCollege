@@ -71,7 +71,7 @@ this.get = function(){
                 studentStorage.setModules(item.value.modules)
                 studentStorage.setLevel(item.value.levelofstudy)
                 $location.path('/addstudent')
-                    $location.replace;
+                $location.replace;
                 
             }
     }
